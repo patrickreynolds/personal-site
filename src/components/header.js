@@ -2,6 +2,8 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 
+const TempHeader = () => (<div></div>)
+
 const Header = ({ siteTitle }) => (
   <header
     style={{
@@ -16,7 +18,10 @@ const Header = ({ siteTitle }) => (
         padding: `1.45rem 1.0875rem`,
       }}
     >
-      <h1 style={{ margin: 0 }}>
+      <h1 style={{
+        margin: 0,
+        display: `inline-block`,
+      }}>
         <Link
           to="/"
           style={{
@@ -27,7 +32,45 @@ const Header = ({ siteTitle }) => (
           {siteTitle}
         </Link>
       </h1>
+      <div
+        style={{
+          float: `right`
+        }}>
+        <h3
+          style={{
+            display: `inline-block`,
+            padding: `0 16px`,
+          }}
+          >
+          <Link
+              to="/blog"
+              style={{
+                color: `white`,
+                textDecoration: `none`,
+              }}
+            >
+             Blog
+          </Link>
+        </h3>
+        <h3
+          style={{
+            display: `inline-block`,
+            padding: `0 16px`,
+          }}
+          >
+          <Link
+            to="/about"
+            style={{
+              color: `white`,
+              textDecoration: `none`,
+            }}
+          >
+            About
+          </Link>
+        </h3>
+      </div>
     </div>
+
   </header>
 )
 
@@ -39,4 +82,6 @@ Header.defaultProps = {
   siteTitle: ``,
 }
 
-export default Header
+// TODO
+
+export default TempHeader

@@ -1,21 +1,76 @@
 import React from "react"
-import { Link } from "gatsby"
+import { graphql } from 'gatsby'
+import styled from 'styled-components'
 
-import Layout from "../components/layout"
-import Image from "../components/image"
+import Layout from "../layout/layout"
+// import Image from "../components/image"
 import SEO from "../components/seo"
+
+import "./rotating-hourglass.css"
+
+const ComingSoon = styled.p`
+  text-align: center;
+`
+
+const TempIndexPage = () => (
+  <div style={{
+    display: `flex`,
+    justifyContent: `center`,
+    alignItems: `center`,
+    height: `100vh`,
+  }}>
+    <ComingSoon>
+      <div
+        class="rotating"
+      >
+        <span role="img">⏳</span>
+      </div>
+
+      <br /><br />
+
+      New site coming soon 
+    </ComingSoon>
+  </div>
+)
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
+    <h1>Home</h1>
+    <p>Still need to design this thing...</p>
   </Layout>
 )
 
-export default IndexPage
+export default TempIndexPage
+
+
+export const pageQuery = graphql`
+  query HomeQuery {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+    allContentfulBlogPost(sort: { fields: [publishDate], order: DESC }) {
+      edges {
+        node {
+          title
+          snippet
+          slug
+          publishDate(formatString: "MMMM Do, YYYY")
+          tags
+          content {
+            childMarkdownRemark {
+              id
+              html
+              timeToRead
+              wordCount {
+                words
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
